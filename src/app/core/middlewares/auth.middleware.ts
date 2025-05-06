@@ -1,42 +1,30 @@
-import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
 import { environment } from '../../../environments/environment';
 
-@Injectable()
-export class AuthMiddleware implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
+export const authInterceptor: HttpInterceptorFn = (req, next) => {
+  const authService = inject(AuthService);
 
-  intercept(
-    request: HttpRequest<unknown>,
-    next: HttpHandler
-  ): Observable<HttpEvent<unknown>> {
-    // Skip if not calling our API
-    if (!request.url.startsWith(environment.apiUrl)) {
-      return next.handle(request);
-    }
-
-    // Skip auth endpoints
-    if (request.url.includes('/logar') || request.url.includes('/cadastrar')) {
-      return next.handle(request);
-    }
-
-    const token = this.authService.getToken();
-
-    if (token) {
-      request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-    }
-
-    return next.handle(request);
+  // skip if not calling our API
+  if (!req.url.startsWith(environment.apiUrl)) {
+    return next(req);
   }
-}
+
+  // skip auth endpoints
+  if (req.url.includes('/logar') || req.url.includes('/cadastrar')) {
+    return next(req);
+  }
+
+  const token = authService.getToken();
+
+  if (token) {
+    req = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  return next(req);
+};
