@@ -5,7 +5,7 @@ import { catchError, throwError } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
 import { SnackbarService } from '../services/snackbar/snackbar.service';
 
-export const errorInterceptor: HttpInterceptorFn = (req, next) => {
+export const errorMiddleware: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const snackbarService = inject(SnackbarService);
   const router = inject(Router);
@@ -15,10 +15,10 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       let errorMessage = 'Ocorreu um erro desconhecido';
 
       if (error.error instanceof ErrorEvent) {
-        // Client-side error
+        // Erro no cliente
         errorMessage = `Erro: ${error.error.message}`;
       } else {
-        // Server-side error
+        // Erro no servidor
         switch (error.status) {
           case 400:
             errorMessage = error.error?.message || 'Requisição inválida';
@@ -26,7 +26,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           case 401:
             errorMessage = 'Não autorizado. Faça login novamente.';
             authService.logout();
-            router.navigate(['/auth/login']);
+            setTimeout(() => router.navigate(['/auth/login']), 0);
             break;
           case 403:
             errorMessage = 'Acesso proibido';
