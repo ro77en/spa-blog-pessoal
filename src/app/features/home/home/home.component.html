@@ -1,0 +1,62 @@
+<div class="home-container">
+  <mat-card class="welcome-card">
+    <mat-card-header>
+      <mat-card-title>Bem-vindo ao Blog Pessoal</mat-card-title>
+      <mat-card-subtitle
+        >Compartilhe suas ideias e pensamentos</mat-card-subtitle
+      >
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>
+        Este é um espaço para compartilhar conhecimento, experiências e
+        reflexões sobre diversos temas. Explore postagens de outros usuários ou
+        crie suas próprias publicações.
+      </p>
+
+      <div class="features">
+        <div class="feature">
+          <mat-icon color="primary">article</mat-icon>
+          <h3>Postagens</h3>
+          <p>
+            Crie e compartilhe suas próprias postagens sobre qualquer tema de
+            interesse.
+          </p>
+        </div>
+
+        <div class="feature">
+          <mat-icon color="primary">category</mat-icon>
+          <h3>Temas</h3>
+          <p>
+            Organize suas postagens por temas para facilitar a descoberta de
+            conteúdo.
+          </p>
+        </div>
+
+        <div class="feature">
+          <mat-icon color="primary">people</mat-icon>
+          <h3>Comunidade</h3>
+          <p>Conecte-se com outros usuários e acompanhe suas publicações.</p>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <ng-container *ngIf="currentUser$ | async as user; else notLoggedIn">
+        <a routerLink="/posts" mat-raised-button color="primary"
+          >Ver Postagens</a
+        >
+        <a routerLink="/posts/new" mat-raised-button color="accent"
+          >Nova Postagem</a
+        >
+      </ng-container>
+
+      <ng-template #notLoggedIn>
+        <a routerLink="/auth/login" mat-raised-button color="primary">Entrar</a>
+        <a routerLink="/auth/register" mat-raised-button color="accent"
+          >Cadastrar</a
+        >
+      </ng-template>
+    </mat-card-actions>
+  </mat-card>
+</div>
