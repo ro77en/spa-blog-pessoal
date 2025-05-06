@@ -1,12 +1,12 @@
-import { IPost } from './post.model';
+import { Post } from './post.model';
 
-export interface IUser {
+export interface User {
   id: number;
   usuario: string;
   foto?: string;
   senha?: string;
-  token?: string;
-  posts?: IPost[];
+  token: string | null;
+  posts?: Post[];
 }
 
 export interface UserLogin {

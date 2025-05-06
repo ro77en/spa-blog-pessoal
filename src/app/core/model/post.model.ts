@@ -1,13 +1,13 @@
-import { ITheme } from './theme.model';
-import { IUser } from './user.model';
+import { Theme } from './theme.model';
+import { User } from './user.model';
 
-export interface IPost {
+export interface Post {
   id: number;
   titulo: string;
   texto: string;
   data: Date;
-  usuario: IUser;
-  tema: ITheme;
+  usuario: User;
+  tema: Theme;
 }
 
 export interface PostCreate {

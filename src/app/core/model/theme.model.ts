@@ -1,6 +1,6 @@
 import { IPost } from './post.model';
 
-export interface ITheme {
+export interface Theme {
   id: number;
   descricao: string;
   posts?: IPost[];
