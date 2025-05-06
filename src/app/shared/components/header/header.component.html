@@ -1,0 +1,38 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <div class="container">
+    <a routerLink="/" class="logo">Blog Pessoal</a>
+    <div class="spacer"></div>
+    <a routerLink="/posts" mat-button>Postagens</a>
+    <a routerLink="/themes" mat-button>Temas</a>
+
+    <ng-container *ngIf="currentUser$ | async as user; else loginButton">
+      <button mat-button [matMenuTriggerFor]="userMenu">
+        <img
+          *ngIf="user.foto"
+          [src]="user.foto"
+          alt="Foto do usuário"
+          class="user-avatar"
+        />
+        <span>{{ user.usuario }}</span>
+      </button>
+      <mat-menu #userMenu="matMenu">
+        <a routerLink="/user/profile" mat-menu-item>
+          <mat-icon>account_circle</mat-icon>
+          <span>Perfil</span>
+        </a>
+        <a routerLink="/user/posts" mat-menu-item>
+          <mat-icon>article</mat-icon>
+          <span>Minhas Postagens</span>
+        </a>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Sair</span>
+        </button>
+      </mat-menu>
+    </ng-container>
+
+    <ng-template #loginButton>
+      <a routerLink="/auth/login" mat-raised-button color="accent">Login</a>
+    </ng-template>
+  </div>
+</mat-toolbar>
