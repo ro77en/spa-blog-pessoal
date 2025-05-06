@@ -13,7 +13,7 @@ import { SnackbarService } from '../services/snackbar/snackbar.service';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class ErrorInterceptor implements HttpInterceptor {
+export class ErrorMiddleware implements HttpInterceptor {
   constructor(
     private authService: AuthService,
     private snackbarService: SnackbarService,
