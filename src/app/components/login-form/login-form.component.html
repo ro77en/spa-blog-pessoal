@@ -6,25 +6,50 @@
 
     <mat-card class="login-card">
       <h2>Entrar</h2>
-      <form>
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Email</mat-label>
-          <input matInput type="email" required />
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            type="text"
+            name="username"
+            [(ngModel)]="username"
+            required
+          />
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Senha</mat-label>
-          <input matInput type="password" required />
+          <input
+            matInput
+            type="password"
+            name="password"
+            [(ngModel)]="password"
+            required
+          />
         </mat-form-field>
 
-        <mat-checkbox class="terms-checkbox">
+        <mat-checkbox
+          name="terms"
+          [(ngModel)]="termsCheckbox"
+          class="terms-checkbox"
+          required
+        >
           Concordo com os termos e condições
         </mat-checkbox>
 
-        <button mat-raised-button color="primary" class="full-width">
+        <button
+          mat-raised-button
+          color="primary"
+          class="full-width"
+          [disabled]="!termsCheckbox"
+        >
           Entrar
         </button>
       </form>
+      <div *ngIf="errorMsg" class="alert alert-danger">
+        {{ errorMsg }}
+      </div>
     </mat-card>
   </div>
 </div>
