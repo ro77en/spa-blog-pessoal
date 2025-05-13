@@ -1,0 +1,31 @@
+<mat-toolbar class="navbar">
+  <a mat-button class="home" routerLink="/home">Início</a>
+
+  <a
+    href="https://www.aceleramaker.com.br/"
+    class="acelera-link"
+    target="_blank"
+  >
+    <img src="/logo-acelera.png" alt="" />
+  </a>
+
+  <div *ngIf="user" class="user-info">
+    <span class="user-name">{{ user.username }}</span>
+
+    <button class="avatar-btn" [matMenuTriggerFor]="menu">
+      <img [src]="user.profilePicUrl" class="avatar" alt="Avatar" />
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/perfil">
+        <mat-icon>person</mat-icon>
+        <span>Ver perfil</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
