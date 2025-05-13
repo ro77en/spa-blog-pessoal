@@ -29,7 +29,9 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
     private storageService: StorageService
-  ) {}
+  ) {
+    this.loadUserFromStorage();
+  }
 
   login(credentials: { username: string; password: string }) {
     return this.http
@@ -44,8 +46,7 @@ export class AuthService {
           };
 
           this.setCurrentUser(user);
-
-          alert('logged in!');
+          this.router.navigate(['/home']);
         })
       );
   }
@@ -60,5 +61,15 @@ export class AuthService {
     if (data) {
       this.currentUser.set(JSON.parse(data));
     }
+  }
+
+  isLoggedIn(): boolean {
+    const user = this.currentUser();
+
+    if (!user || !user.token) {
+      return false;
+    }
+
+    return !this.jwtHelper.isTokenExpired(user.token);
   }
 }
