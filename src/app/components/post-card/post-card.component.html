@@ -1,0 +1,27 @@
+<div class="post-card">
+  <div class="post-header">
+    <div class="post-author">
+      <img
+        [src]="post.user.profilePicUrl"
+        alt="Avatar do usuário"
+        class="author-avatar"
+      />
+      <span class="author-name">{{ post.user.username }}</span>
+    </div>
+    <span class="post-date">{{
+      post.timestamp | date : "dd/MM/yyyy HH:mm"
+    }}</span>
+  </div>
+
+  <div class="post-content">
+    <h3 class="post-title">{{ post.title }}</h3>
+    <p class="post-text">{{ truncateText(post.content, 200) }}</p>
+  </div>
+
+  <div class="post-footer">
+    <span *ngIf="post.category" class="post-category">
+      {{ post.category.title }}
+    </span>
+    <a [routerLink]="['/posts', post.id]" class="read-more">Ler mais</a>
+  </div>
+</div>
