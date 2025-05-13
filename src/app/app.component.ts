@@ -3,7 +3,6 @@ import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuthService } from './auth/auth.service';
 import { CommonModule } from '@angular/common';
-import { StorageService } from './services/storage.service';
 
 @Component({
   selector: 'app-root',
