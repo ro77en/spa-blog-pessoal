@@ -1,0 +1,23 @@
+<div class="home-container">
+  <div class="feed-header">
+    <h1>Últimas postagens</h1>
+  </div>
+
+  <div class="loading-container" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Carregando posts...</p>
+  </div>
+
+  <ng-container *ngIf="!isLoading">
+    <div class="posts-container" *ngIf="posts?.length; else noPosts">
+      <app-post-card *ngFor="let post of posts" [post]="post" />
+    </div>
+
+    <ng-template #noPosts>
+      <div class="no-posts">
+        <h2>Nenhuma postagem encontrada</h2>
+        <p>Não existem posts disponíveis no momento</p>
+      </div>
+    </ng-template>
+  </ng-container>
+</div>
