@@ -47,7 +47,6 @@ export class LoginFormComponent {
     };
 
     this.authService.login(loginData).subscribe({
-      next: () => console.log('success!'),
       error: () => {
         this.errorMsg = 'Erro de autenticação. Verifique suas credenciais';
       },
