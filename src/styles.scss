@@ -65,8 +65,13 @@ body {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .form {
@@ -77,6 +82,7 @@ body {
     justify-content: center;
     padding: 2em;
     box-shadow: #696969 2px 3px 5px 0px;
+    position: relative;
 
     background-color: white;
     border-radius: 15px;
@@ -100,4 +106,75 @@ body {
     box-shadow: none;
     border: none;
     gap: 1em;
+}
+
+.red-btn {
+    background-color: #d32f2f !important;
+}
+
+.msg-container {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    right: 16px;
+    z-index: 10;
+    pointer-events: none;
+
+}
+
+.success-msg,
+.error-msg {
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    pointer-events: auto;
+}
+
+.success-msg {
+    color: #2e7d32;
+    background-color: #c8e6c9;
+    border: 1px solid #81c784;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+
+.error-msg {
+    color: #c62828;
+    background-color: #ffcdd2;
+    border: 1px solid #e57373;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+.animate {
+    animation: fadeSlideIn 0.4s ease-out, fadeOut 0.4s ease-in 2.6s forwards;
 }
