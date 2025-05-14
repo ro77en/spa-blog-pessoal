@@ -14,4 +14,11 @@ export class UserService {
   getUserByUsername(username: string): Observable<User> {
     return this.http.get<User>(`${this.API_URL}/${username}`);
   }
+
+  editUserInfo(
+    userId: number,
+    data: { username: string; password: string; profilePicUrl: string }
+  ) {
+    return this.http.put<void>(`${this.API_URL}/${userId}`, data);
+  }
 }
