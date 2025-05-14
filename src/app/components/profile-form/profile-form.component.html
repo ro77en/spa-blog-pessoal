@@ -1,0 +1,45 @@
+<div class="form">
+  <div>
+    <div class="msg-container">
+      <div *ngIf="successMsg" class="success-msg animate">
+        {{ successMsg }}
+      </div>
+      <div *ngIf="errorMsg" class="error-msg animate">
+        {{ errorMsg }}
+      </div>
+    </div>
+    <mat-card class="card">
+      <h2>Alterar informações</h2>
+      <form (ngSubmit)="onSubmit()" #editForm="ngForm">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Username</mat-label>
+          <input type="text" matInput name="username" [(ngModel)]="username" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Foto de Perfil URL</mat-label>
+          <input
+            type="text"
+            matInput
+            name="profilePicUrl"
+            [(ngModel)]="profilePicUrl"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Senha</mat-label>
+          <input
+            type="password"
+            matInput
+            name="password"
+            [(ngModel)]="password"
+          />
+        </mat-form-field>
+        <div class="form-btn">
+          <button mat-flat-button class="red-btn">Descartar</button>
+          <button mat-flat-button>Salvar</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>
