@@ -1,0 +1,14 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Olá, {{ user?.username }}!</h1>
+  </div>
+
+  <div class="loading-container" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Carregando informações do usuário...</p>
+  </div>
+
+  <div class="profile" *ngIf="!isLoading">
+    <app-profile-form [userInfo]="user" />
+  </div>
+</div>
