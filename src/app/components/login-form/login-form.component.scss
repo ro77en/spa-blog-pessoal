@@ -20,8 +20,10 @@
     gap: 1.5em;
   }
   
-  .signup-link {
-    text-decoration: none;
+  .toggle-form {
+    padding: 3px;
+    border: none;
+    background-color: transparent;
     font-weight: bold;
     color: #1976d2;
     transition: color 0.3s;
@@ -29,7 +31,7 @@
     cursor: pointer;
   }
   
-  .signup-link:hover {
+  .toggle-form:hover {
     color: #004ba0;
   }
   

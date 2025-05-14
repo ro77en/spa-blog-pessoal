@@ -8,6 +8,11 @@
     </p>
   </div>
   <div class="right flex-center">
-    <app-login-form />
+    <ng-container *ngIf="isLogin; else signup">
+      <app-login-form (click)="toggleForms()" />
+    </ng-container>
+    <ng-template #signup>
+      <app-signup-form (click)="toggleForms()" />
+    </ng-template>
   </div>
 </div>

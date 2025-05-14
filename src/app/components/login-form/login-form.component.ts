@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -31,6 +31,11 @@ export class LoginFormComponent {
   isSubmitting: boolean = false;
 
   constructor(private authService: AuthService) {}
+
+  @Output() toggleForms = new EventEmitter<void>();
+  onToggleEmitt() {
+    this.toggleForms.emit();
+  }
 
   onSubmit(): void {
     this.isSubmitting = true;
