@@ -4,6 +4,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 2em;
+    box-shadow: #696969 2px 3px 5px 0px;
+
+    background-color: white;
+    border-radius: 15px;
   }
   
   .form-container {
@@ -60,6 +65,9 @@
     padding: 2em;
     display: flex;
     flex-direction: column;
+    background-color: white;
+    box-shadow: none;
+    border: none;
     gap: 1em;
   }
   
