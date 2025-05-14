@@ -27,7 +27,6 @@ import { AuthService } from '../../auth/auth.service';
 export class LoginFormComponent {
   username: string = '';
   password: string = '';
-  termsCheckbox: boolean = false;
   errorMsg: string = '';
   isSubmitting: boolean = false;
 

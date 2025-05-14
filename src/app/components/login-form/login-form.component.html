@@ -29,21 +29,7 @@
           />
         </mat-form-field>
 
-        <mat-checkbox
-          name="terms"
-          [(ngModel)]="termsCheckbox"
-          class="terms-checkbox"
-          required
-        >
-          Concordo com os termos e condições
-        </mat-checkbox>
-
-        <button
-          mat-raised-button
-          color="primary"
-          class="full-width"
-          [disabled]="!termsCheckbox"
-        >
+        <button mat-raised-button color="primary" class="full-width">
           Entrar
         </button>
       </form>
