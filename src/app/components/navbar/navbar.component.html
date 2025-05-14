@@ -1,5 +1,5 @@
 <mat-toolbar class="navbar">
-  <a mat-button class="home" routerLink="/home">Início</a>
+  <a mat-button class="home" (click)="goToHomePage()">Início</a>
 
   <a
     href="https://www.aceleramaker.com.br/"
@@ -17,7 +17,7 @@
     </button>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/perfil">
+      <button mat-menu-item (click)="goToProfilePage()">
         <mat-icon>person</mat-icon>
         <span>Ver perfil</span>
       </button>

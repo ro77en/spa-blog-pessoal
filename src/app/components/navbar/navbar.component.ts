@@ -10,6 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { AuthService } from '../../auth/auth.service';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -30,7 +31,8 @@ export class NavbarComponent {
 
   constructor(
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {
     this.showUserInfo();
   }
@@ -50,5 +52,13 @@ export class NavbarComponent {
 
   logout(): void {
     return this.authService.logout();
+  }
+
+  goToHomePage(): void {
+    this.router.navigate(['/home']);
+  }
+
+  goToProfilePage(): void {
+    this.router.navigate(['/profile']);
   }
 }
