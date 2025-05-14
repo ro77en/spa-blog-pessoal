@@ -9,10 +9,10 @@
   </div>
   <div class="right flex-center">
     <ng-container *ngIf="isLogin; else signup">
-      <app-login-form (click)="toggleForms()" />
+      <app-login-form (toggleForms)="toggleForms()" />
     </ng-container>
     <ng-template #signup>
-      <app-signup-form (click)="toggleForms()" />
+      <app-signup-form (toggleForms)="toggleForms()" />
     </ng-template>
   </div>
 </div>

@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-signup-form',
@@ -25,11 +26,50 @@ import { MatInputModule } from '@angular/material/input';
 export class SignupFormComponent {
   username: string = '';
   password: string = '';
+  profilePicUrl: string = '';
   confirmPassword: string = '';
   termsCheckbox: boolean = false;
   errorMsg: string = '';
 
-  @Output() onToggleForms = new EventEmitter<void>();
+  isSubmitting: boolean = false;
 
-  onSubmit() {}
+  constructor(private authService: AuthService) {}
+
+  @Output() toggleForms = new EventEmitter<void>();
+  onToggleEmitt() {
+    this.toggleForms.emit();
+  }
+
+  onSubmit() {
+    this.isSubmitting = true;
+
+    if (!this.username || !this.password || !this.confirmPassword) {
+      this.isSubmitting = false;
+      this.errorMsg = 'Nome, senha e confirmação de senha sao obrigatórios';
+      return;
+    }
+
+    if (!(this.password === this.confirmPassword)) {
+      this.isSubmitting = false;
+      this.errorMsg = 'A confirmação de senha não confere';
+      return;
+    }
+
+    const userData = {
+      username: this.username,
+      password: this.password,
+      profilePicUrl: this.profilePicUrl,
+    };
+
+    this.authService.register(userData).subscribe({
+      error: (e) => {
+        this.isSubmitting = false;
+        if (e.status === 422) {
+          this.errorMsg = 'Nome de usuário já está em uso. Escolha outro';
+          return;
+        }
+        this.errorMsg = 'Erro no cadastro. Por favor, tente novamente';
+      },
+    });
+  }
 }

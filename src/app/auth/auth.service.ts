@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { StorageService } from '../services/storage.service';
-import { tap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
 
 interface AuthUser {
   username: string;
@@ -48,6 +48,23 @@ export class AuthService {
           this.setCurrentUser(user);
           this.router.navigate(['/home']);
         })
+      );
+  }
+
+  register(userData: {
+    username: string;
+    password: string;
+    profilePicUrl?: string;
+  }) {
+    return this.http
+      .post<void>(`${this.API_URL}/register`, userData)
+      .pipe(
+        switchMap(() =>
+          this.login({
+            username: userData.username,
+            password: userData.password,
+          })
+        )
       );
   }
 
