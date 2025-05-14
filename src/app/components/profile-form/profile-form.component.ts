@@ -1,13 +1,17 @@
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+
 import { User } from '../../models/user.model';
+import { UserService } from '../../services/user.service';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { UserService } from '../../services/user.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DiscardDialogComponent } from '../discard-dialog.component';
 
 @Component({
   selector: 'app-profile-form',
@@ -18,6 +22,7 @@ import { UserService } from '../../services/user.service';
     MatInputModule,
     MatCardModule,
     MatButtonModule,
+    MatDialogModule,
   ],
   templateUrl: './profile-form.component.html',
   styleUrl: './profile-form.component.scss',
@@ -34,7 +39,11 @@ export class ProfileFormComponent {
   errorMsg: string = '';
   successMsg: string = '';
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     if (this.userInfo) {
@@ -81,6 +90,16 @@ export class ProfileFormComponent {
         this.errorMsg =
           'Erro ao atualizar informações. Por favor, tente novamente';
       },
+    });
+  }
+
+  discardChanges() {
+    const dialogRef = this.dialog.open(DiscardDialogComponent);
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.router.navigate(['/']);
+      }
     });
   }
 }

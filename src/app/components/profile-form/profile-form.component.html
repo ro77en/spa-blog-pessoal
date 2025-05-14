@@ -36,7 +36,14 @@
           />
         </mat-form-field>
         <div class="form-btn">
-          <button mat-flat-button class="red-btn">Descartar</button>
+          <button
+            type="button"
+            mat-flat-button
+            class="red-btn"
+            (click)="discardChanges()"
+          >
+            Descartar
+          </button>
           <button mat-flat-button>Salvar</button>
         </div>
       </form>
