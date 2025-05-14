@@ -1,4 +1,4 @@
-<div class="signup-form">
+<div class="form">
   <div class="form-container">
     <button class="toggle-form" (click)="onToggleEmitt()">
       Já tem conta? Faça login
@@ -6,9 +6,9 @@
 
     <div class="divider">ou</div>
 
-    <mat-card class="signup-card">
+    <mat-card class="card">
       <h2>Cadastre-se</h2>
-      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <form (ngSubmit)="onSubmit()" #signUpForm="ngForm">
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Username</mat-label>
           <input

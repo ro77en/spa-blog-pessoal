@@ -1,97 +1,65 @@
-.login-form {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2em;
-    box-shadow: #696969 2px 3px 5px 0px;
+.toggle-form {
+  padding: 3px;
+  border: none;
+  background-color: transparent;
+  font-weight: bold;
+  color: #1976d2;
+  transition: color 0.3s;
+  font-size: 1em;
+  cursor: pointer;
+}
 
-    background-color: white;
-    border-radius: 15px;
-  }
-  
-  .form-container {
-    width: 100%;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5em;
-  }
-  
-  .toggle-form {
-    padding: 3px;
-    border: none;
-    background-color: transparent;
-    font-weight: bold;
-    color: #1976d2;
-    transition: color 0.3s;
-    font-size: 1em;
-    cursor: pointer;
-  }
-  
-  .toggle-form:hover {
-    color: #004ba0;
-  }
-  
-  .divider {
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #999;
-    position: relative;
-    text-align: center;
-    width: 100%;
-  }
-  
-  .divider::before,
-  .divider::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 40%;
-    height: 1px;
-    background-color: #ccc;
-  }
-  
-  .divider::before {
-    left: 0;
-  }
-  
-  .divider::after {
-    right: 0;
-  }
-  
-  .login-card {
-    width: 100%;
-    padding: 2em;
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    box-shadow: none;
-    border: none;
-    gap: 1em;
-  }
-  
-  .full-width {
-    width: 100%;
-  }
-  
-  .terms-checkbox {
-    margin: 0.5em 0;
-  }
-  
-  .error-message {
-    color: #dc3545;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
+.toggle-form:hover {
+  color: #004ba0;
+}
+
+.divider {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #999;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background-color: #ccc;
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+
+.full-width {
+  width: 100%;
+}
+
+.terms-checkbox {
+  margin: 0.5em 0;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 }
 
 .alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border-radius: 4px;
-    border: 1px solid #f5c6cb;
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  border: 1px solid #f5c6cb;
 }
