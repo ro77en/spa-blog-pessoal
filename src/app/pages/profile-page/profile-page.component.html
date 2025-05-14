@@ -1,6 +1,6 @@
 <div class="page-container">
   <div class="page-header">
-    <h1>Olá, {{ user?.username }}!</h1>
+    <h1 *ngIf="!isLoading">Olá, {{ user?.username }}!</h1>
   </div>
 
   <div class="loading-container" *ngIf="isLoading">
