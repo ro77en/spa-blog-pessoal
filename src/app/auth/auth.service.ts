@@ -56,16 +56,14 @@ export class AuthService {
     password: string;
     profilePicUrl?: string;
   }) {
-    return this.http
-      .post<void>(`${this.API_URL}/register`, userData)
-      .pipe(
-        switchMap(() =>
-          this.login({
-            username: userData.username,
-            password: userData.password,
-          })
-        )
-      );
+    return this.http.post<void>(`${this.API_URL}/register`, userData).pipe(
+      switchMap(() =>
+        this.login({
+          username: userData.username,
+          password: userData.password,
+        })
+      )
+    );
   }
 
   logout() {
@@ -76,8 +74,20 @@ export class AuthService {
 
   loadUserFromStorage() {
     const data = this.storageService.getItem('currentUser');
-    if (data) {
-      this.currentUser.set(JSON.parse(data));
+    if (!data) return;
+
+    try {
+      const user = JSON.parse(data);
+      const token = user.token;
+
+      if (this.isTokenValid(token)) {
+        this.currentUser.set(user);
+      } else {
+        this.logout();
+      }
+    } catch (e) {
+      console.error('Erro ao carregar usuário do storage', e);
+      this.logout();
     }
   }
 
@@ -89,5 +99,16 @@ export class AuthService {
     }
 
     return !this.jwtHelper.isTokenExpired(user.token);
+  }
+
+  private isTokenValid(token: string): boolean {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const expiry = payload.exp;
+      const now = Math.floor(Date.now() / 1000);
+      return expiry > now;
+    } catch {
+      return false;
+    }
   }
 }
