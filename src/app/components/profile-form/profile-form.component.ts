@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DiscardDialogComponent } from '../discard-dialog.component';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-profile-form',
@@ -100,6 +101,25 @@ export class ProfileFormComponent {
       if (confirmed) {
         this.router.navigate(['/']);
       }
+    });
+  }
+
+  deleteUser() {
+    const userId = this.userInfo?.id;
+
+    if (!userId) {
+      this.errorMsg = 'Usuário não encontrado, por favor faça login novamente';
+      return;
+    }
+
+    this.userService.deleteUser(userId).subscribe({
+      next: () => {
+        this.successMsg = 'Usuário deletado com sucesso';
+      },
+      error: (e) => {
+        this.errorMsg = 'Não foi possível deletar o usuário';
+        console.error(`Erro ${e.status}`, e);
+      },
     });
   }
 }

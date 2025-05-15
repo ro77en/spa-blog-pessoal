@@ -1,5 +1,5 @@
 <div class="form">
-  <div>
+  <div class="wrapper">
     <div class="msg-container">
       <div *ngIf="successMsg" class="success-msg animate">
         {{ successMsg }}
@@ -48,5 +48,15 @@
         </div>
       </form>
     </mat-card>
+    <div class="delete">
+      <button
+        type="button"
+        mat-flat-button
+        class="red-btn"
+        (click)="deleteUser()"
+      >
+        Excluir usuário
+      </button>
+    </div>
   </div>
 </div>

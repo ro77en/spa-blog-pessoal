@@ -4,3 +4,14 @@
     justify-content: end;
     gap: 1em;
 }
+
+.form .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+}
+
+.delete {
+    align-self: flex-end;
+}
