@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Post } from '../models/post.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +22,9 @@ export class PostService {
     categoryId: number;
   }) {
     return this.http.post<void>(`${this.API_URL}`, postData);
+  }
+
+  deletePost(postId: number): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/${postId}`);
   }
 }

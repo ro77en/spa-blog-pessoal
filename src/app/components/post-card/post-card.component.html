@@ -25,4 +25,24 @@
       {{ post.category.title }}
     </span>
   </div>
+
+  <div class="delete-post" *ngIf="canDelete">
+    <div class="delete">
+      <button
+        type="button"
+        mat-flat-button
+        class="red-btn"
+        (click)="deletePost()"
+      >
+        Excluir post
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="successMsg" class="success-msg">
+    {{ successMsg }}
+  </div>
+  <div *ngIf="errorMsg" class="error-msg">
+    {{ errorMsg }}
+  </div>
 </div>
