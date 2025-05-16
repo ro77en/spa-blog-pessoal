@@ -1,0 +1,50 @@
+<h2 mat-dialog-title>Criar nova postagem</h2>
+
+<mat-dialog-content class="form-container">
+  <form #postForm="ngForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Título</mat-label>
+      <input matInput name="title" [(ngModel)]="title" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Conteúdo (máx.: 255 caracteres)</mat-label>
+      <textarea
+        matInput
+        name="content"
+        [(ngModel)]="content"
+        required
+        rows="5"
+        maxlength="255"
+      ></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Categoria</mat-label>
+      <mat-select name="categoryId" [(ngModel)]="categoryId" required>
+        <mat-option *ngFor="let category of categories" [value]="category.id">
+          {{ category.title }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="successMsg" class="success-msg animate">
+      {{ successMsg }}
+    </div>
+    <div *ngIf="errorMsg" class="error-msg animate">
+      {{ errorMsg }}
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="createPost()"
+    [disabled]="!postForm.form.valid"
+  >
+    {{ isSubmitting ? "Enviando..." : "Cadastrar" }}
+  </button>
+</mat-dialog-actions>

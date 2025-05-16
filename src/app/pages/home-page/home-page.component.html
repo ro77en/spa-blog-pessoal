@@ -9,6 +9,10 @@
   </div>
 
   <ng-container *ngIf="!isLoading">
+    <div class="post-actions">
+      <button mat-flat-button (click)="openNewPostDialog()">Novo post</button>
+    </div>
+
     <div class="posts-container" *ngIf="posts?.length; else noPosts">
       <app-post-card *ngFor="let post of posts" [post]="post" />
     </div>

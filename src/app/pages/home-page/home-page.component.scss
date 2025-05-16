@@ -4,10 +4,15 @@
     gap: 1rem;
 }
 
-
 .no-posts {
     text-align: center;
     padding: 2rem;
     background-color: #f8f9fa;
     border-radius: 8px;
+}
+
+.post-actions {
+    width: 100%;
+    text-align: end;
+    margin-bottom: 1em;
 }
