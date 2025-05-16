@@ -7,6 +7,7 @@ import { StorageService } from '../services/storage.service';
 import { switchMap, tap } from 'rxjs';
 
 interface AuthUser {
+  userId: number;
   username: string;
   token: string;
 }
@@ -41,6 +42,7 @@ export class AuthService {
           const decoded = this.jwtHelper.decodeToken(res.token);
 
           const user: AuthUser = {
+            userId: decoded.id,
             username: decoded.sub,
             token: res.token,
           };
