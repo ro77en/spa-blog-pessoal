@@ -13,4 +13,13 @@ export class PostService {
   getPosts() {
     return this.http.get<Post[]>(`${this.API_URL}`);
   }
+
+  createPost(postData: {
+    title: string;
+    content: string;
+    userId: number;
+    categoryId: number;
+  }) {
+    return this.http.post<void>(`${this.API_URL}`, postData);
+  }
 }
