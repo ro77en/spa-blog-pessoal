@@ -13,8 +13,16 @@ export class PostCardComponent {
   @Input({ required: true })
   post!: Post;
 
+  expanded: boolean = false;
+
   truncateText(text: string, maxLength: number): string {
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + '...';
   }
+
+  toggleExpandedPost() {
+    this.expanded = !this.expanded;
+  }
+
+  showPostActions() {}
 }

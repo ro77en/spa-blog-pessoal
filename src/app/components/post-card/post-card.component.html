@@ -1,4 +1,4 @@
-<div class="post-card">
+<div class="post-card" (click)="toggleExpandedPost()">
   <div class="post-header">
     <div class="post-author">
       <img
@@ -15,13 +15,14 @@
 
   <div class="post-content">
     <h3 class="post-title">{{ post.title }}</h3>
-    <p class="post-text">{{ truncateText(post.content, 200) }}</p>
+    <p class="post-text">
+      {{ expanded ? post.content : truncateText(post.content, 100) }}
+    </p>
   </div>
 
   <div class="post-footer">
     <span *ngIf="post.category" class="post-category">
       {{ post.category.title }}
     </span>
-    <a [routerLink]="['/posts', post.id]" class="read-more">Ler mais</a>
   </div>
 </div>
