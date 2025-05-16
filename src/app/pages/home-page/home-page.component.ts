@@ -58,8 +58,6 @@ export class HomePageComponent implements OnInit {
   }
 
   openNewPostDialog(): void {
-    console.log(this.categories);
-
     const dialogRef = this.dialog.open(NewPostComponent, {
       data: { categories: this.categories },
     });
