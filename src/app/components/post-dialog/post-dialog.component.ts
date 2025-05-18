@@ -13,6 +13,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Category } from '../../models/category.model';
 import { PostService } from '../../services/post.service';
 import { AuthService } from '../../auth/auth.service';
+import { Post } from '../../models/post.model';
 
 @Component({
   selector: 'app-new-post',
@@ -25,13 +26,13 @@ import { AuthService } from '../../auth/auth.service';
     MatSelectModule,
     MatButtonModule,
   ],
-  templateUrl: './new-post.component.html',
-  styleUrl: './new-post.component.scss',
+  templateUrl: './post-dialog.component.html',
+  styleUrl: './post-dialog.component.scss',
 })
-export class NewPostComponent {
+export class PostDialogComponent {
   title: string = '';
   content: string = '';
-  categoryId: string = '';
+  categoryId: number = 0;
   categories: Category[] = [];
 
   successMsg: string = '';
@@ -39,13 +40,19 @@ export class NewPostComponent {
   isSubmitting: boolean = false;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { categories: Category[] },
+    @Inject(MAT_DIALOG_DATA)
+    public data: { post?: Post; categories: Category[] },
     private postService: PostService,
     private authService: AuthService,
-    private dialogRef: MatDialogRef<NewPostComponent>
+    private dialogRef: MatDialogRef<PostDialogComponent>
   ) {}
 
   ngOnInit() {
+    if (this.data.post) {
+      this.title = this.data.post.title;
+      this.content = this.data.post.content;
+      this.categoryId = this.data.post.category.id;
+    }
     this.categories = this.data.categories;
   }
 
@@ -64,14 +71,7 @@ export class NewPostComponent {
       this.postService.createPost(postData).subscribe({
         next: () => {
           this.successMsg = 'Post criado com sucesso!';
-          this.title = '';
-          this.content = '';
-          this.categoryId = '';
-          this.isSubmitting = false;
-
-          setTimeout(() => {
-            this.dialogRef.close(true);
-          }, 1000);
+          this.clearFormAndClose();
         },
         error: (e) => {
           this.errorMsg = 'Erro na criação do post, tente novamente';
@@ -79,5 +79,39 @@ export class NewPostComponent {
         },
       });
     }
+  }
+
+  updatePost() {
+    this.isSubmitting = true;
+    const user = this.authService.currentUser();
+
+    if (!user || this.data.post) return;
+
+    const postData = {
+      postId: this.data.post!.id,
+      title: this.title,
+      content: this.content,
+      userId: user.userId,
+      categoryId: this.categoryId,
+    };
+
+    this.postService.editPost(postData).subscribe({
+      next: () => {
+        this.successMsg = 'Post atualizado com sucesso!';
+        this.clearFormAndClose();
+      },
+      error: (e) => {
+        this.errorMsg = 'Erro ao atualizar o post.';
+        console.error(e);
+        this.isSubmitting = false;
+      },
+    });
+  }
+
+  private clearFormAndClose() {
+    this.isSubmitting = false;
+    setTimeout(() => {
+      this.dialogRef.close(true);
+    }, 1000);
   }
 }
