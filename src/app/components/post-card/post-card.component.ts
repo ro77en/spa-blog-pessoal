@@ -20,7 +20,7 @@ export class PostCardComponent {
   post!: Post;
 
   expanded: boolean = false;
-  canDelete: boolean = false;
+  isAuthor: boolean = false;
   successMsg: string = '';
   errorMsg: string = '';
 
@@ -44,7 +44,7 @@ export class PostCardComponent {
     const authUserId = this.authService.currentUser()?.userId;
     const postAuthorId = this.post.user.id;
 
-    this.canDelete = this.expanded && authUserId === postAuthorId;
+    this.isAuthor = this.expanded && authUserId === postAuthorId;
   }
 
   deletePost() {
