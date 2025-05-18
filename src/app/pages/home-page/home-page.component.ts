@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category.model';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { NewPostComponent } from '../../components/new-post/new-post.component';
+import { PostDialogComponent } from '../../components/post-dialog/post-dialog.component';
 
 @Component({
   selector: 'app-home-page',
@@ -58,12 +58,27 @@ export class HomePageComponent implements OnInit {
   }
 
   openNewPostDialog(): void {
-    const dialogRef = this.dialog.open(NewPostComponent, {
+    const dialogRef = this.dialog.open(PostDialogComponent, {
       data: { categories: this.categories },
     });
 
     dialogRef.afterClosed().subscribe((created) => {
       if (created) {
+        window.location.reload();
+      }
+    });
+  }
+
+  openEditPostDialog(post: Post): void {
+    const dialogRef = this.dialog.open(PostDialogComponent, {
+      data: {
+        post,
+        categories: this.categories,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((updated) => {
+      if (updated) {
         window.location.reload();
       }
     });

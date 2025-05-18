@@ -14,7 +14,11 @@
     </div>
 
     <div class="posts-container" *ngIf="posts?.length; else noPosts">
-      <app-post-card *ngFor="let post of posts" [post]="post" />
+      <app-post-card
+        *ngFor="let post of posts"
+        [post]="post"
+        (editPostEmitter)="openEditPostDialog($event)"
+      />
     </div>
 
     <ng-template #noPosts>
