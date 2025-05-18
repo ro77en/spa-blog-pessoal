@@ -1,4 +1,6 @@
-<h2 mat-dialog-title>Criar nova postagem</h2>
+<h2 mat-dialog-title>
+  {{ postAction === "Criar" ? "Criar nova postagem" : "Editar postagem" }}
+</h2>
 
 <mat-dialog-content class="form-container">
   <form #postForm="ngForm">
@@ -42,9 +44,9 @@
   <button
     mat-flat-button
     color="primary"
-    (click)="createPost()"
+    (click)="submitPost()"
     [disabled]="!postForm.form.valid"
   >
-    {{ isSubmitting ? "Enviando..." : "Cadastrar" }}
+    {{ isSubmitting ? "Enviando..." : "Salvar" }}
   </button>
 </mat-dialog-actions>

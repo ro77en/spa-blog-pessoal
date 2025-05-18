@@ -35,6 +35,8 @@ export class PostDialogComponent {
   categoryId: number = 0;
   categories: Category[] = [];
 
+  postAction: 'Criar' | 'Editar' = 'Criar';
+
   successMsg: string = '';
   errorMsg: string = '';
   isSubmitting: boolean = false;
@@ -49,15 +51,19 @@ export class PostDialogComponent {
 
   ngOnInit() {
     if (this.data.post) {
+      this.postAction = 'Editar';
       this.title = this.data.post.title;
       this.content = this.data.post.content;
       this.categoryId = this.data.post.category.id;
+    } else {
+      this.postAction = 'Criar';
     }
     this.categories = this.data.categories;
   }
 
   createPost() {
     this.isSubmitting = true;
+    this.postAction = 'Criar';
     const user = this.authService.currentUser();
 
     if (user) {
@@ -83,9 +89,10 @@ export class PostDialogComponent {
 
   updatePost() {
     this.isSubmitting = true;
+    this.postAction = 'Editar';
     const user = this.authService.currentUser();
 
-    if (!user || this.data.post) return;
+    if (!user || !this.data.post) return;
 
     const postData = {
       postId: this.data.post!.id,
@@ -106,6 +113,14 @@ export class PostDialogComponent {
         this.isSubmitting = false;
       },
     });
+  }
+
+  submitPost() {
+    if (this.postAction === 'Criar') {
+      this.createPost();
+    } else {
+      this.updatePost();
+    }
   }
 
   private clearFormAndClose() {
