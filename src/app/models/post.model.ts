@@ -9,7 +9,7 @@ export interface Post {
     profilePicUrl: string;
   };
   category: {
-    id?: number;
+    id: number;
     title: string;
   };
 }
