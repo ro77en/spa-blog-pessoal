@@ -82,6 +82,8 @@
     color: #0056b3;
 }
 
-.delete-post {
-    text-align: end;
+.post-actions {
+    display: flex;
+    justify-content: end;
+    gap: 1em;
 }

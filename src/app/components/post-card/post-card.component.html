@@ -26,7 +26,12 @@
     </span>
   </div>
 
-  <div class="delete-post" *ngIf="canDelete">
+  <div class="post-actions" *ngIf="isAuthor">
+    <div class="edit">
+      <button type="button" mat-flat-button (click)="onEditPost()">
+        Editar post
+      </button>
+    </div>
     <div class="delete">
       <button
         type="button"

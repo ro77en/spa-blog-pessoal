@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Post } from '../../models/post.model';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -18,6 +18,8 @@ import { filter, switchMap } from 'rxjs';
 export class PostCardComponent {
   @Input({ required: true })
   post!: Post;
+
+  @Output() editPostEmitter = new EventEmitter<Post>();
 
   expanded: boolean = false;
   isAuthor: boolean = false;
@@ -70,5 +72,9 @@ export class PostCardComponent {
           this.errorMsg = 'Erro ao deletar o post, tente novamente';
         },
       });
+  }
+
+  onEditPost() {
+    this.editPostEmitter.emit();
   }
 }
