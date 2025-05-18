@@ -75,6 +75,6 @@ export class PostCardComponent {
   }
 
   onEditPost() {
-    this.editPostEmitter.emit();
+    this.editPostEmitter.emit(this.post);
   }
 }
