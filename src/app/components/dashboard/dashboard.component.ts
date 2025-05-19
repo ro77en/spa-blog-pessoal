@@ -43,6 +43,12 @@ export class DashboardComponent {
   posts: Post[] = [];
   categories: Category[] = [];
 
+  topUser?: User;
+  topUserPosts: number = 0;
+
+  topCategory?: Category;
+  topCategoryPosts: number = 0;
+
   selectedView: 'user' | 'category' = 'user';
 
   chartData: ChartData<'bar'> = {
@@ -113,6 +119,28 @@ export class DashboardComponent {
     return colors;
   }
 
+  private getTopUser() {
+    const userPostCounts = this.users.map((u) => ({
+      user: u,
+      count: this.posts.filter((p) => p.user.id === u.id).length,
+    }));
+    const topUserData = userPostCounts.sort((a, b) => b.count - a.count)[0];
+    this.topUser = topUserData?.user;
+    this.topUserPosts = topUserData?.count ?? 0;
+  }
+
+  private getTopCategory() {
+    const categoryPostCounts = this.categories.map((c) => ({
+      category: c,
+      count: this.posts.filter((p) => p.category.title === c.title).length,
+    }));
+    const topCategoryData = categoryPostCounts.sort(
+      (a, b) => b.count - a.count
+    )[0];
+    this.topCategory = topCategoryData?.category;
+    this.topCategoryPosts = topCategoryData?.count ?? 0;
+  }
+
   onViewChange() {
     this.prepareChartsData();
   }
@@ -142,6 +170,8 @@ export class DashboardComponent {
     this.chartData.datasets[0].backgroundColor = this.generateColors(
       labels.length
     );
+    this.getTopUser();
+    this.getTopCategory();
 
     this.chart?.update();
   }

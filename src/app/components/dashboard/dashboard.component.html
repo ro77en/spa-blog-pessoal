@@ -22,6 +22,28 @@
       ></canvas>
     </mat-card>
   </mat-grid-list>
+
+  <mat-grid-list cols="2" gutterSize="16px" rowHeight="300px" class="cards">
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>Usuário com mais postagens</mat-card-title>
+        <div class="content-wrapper">
+          <mat-card-content>{{ topUser?.username }} </mat-card-content>
+          <mat-card-content>{{ topUserPosts }} </mat-card-content>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>Categoria com mais postagens</mat-card-title>
+        <div class="content-wrapper">
+          <mat-card-content>{{ topCategory?.title }} </mat-card-content>
+          <mat-card-content>{{ topCategoryPosts }} </mat-card-content>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
   <div *ngIf="errorMsg" class="error-msg">
     {{ errorMsg }}
   </div>
