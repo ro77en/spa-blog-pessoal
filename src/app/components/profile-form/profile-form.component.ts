@@ -13,6 +13,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DiscardDialogComponent } from '../discard-dialog.component';
 import { AuthService } from '../../auth/auth.service';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { filter, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-profile-form',
@@ -43,7 +45,8 @@ export class ProfileFormComponent {
   constructor(
     private userService: UserService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -112,14 +115,27 @@ export class ProfileFormComponent {
       return;
     }
 
-    this.userService.deleteUser(userId).subscribe({
-      next: () => {
-        this.successMsg = 'Usuário deletado com sucesso';
-      },
-      error: (e) => {
-        this.errorMsg = 'Não foi possível deletar o usuário';
-        console.error(`Erro ${e.status}`, e);
-      },
-    });
+    this.dialog
+      .open(ConfirmDialogComponent, {
+        data: {
+          title: 'Confirmar exclusão',
+          message: 'Tem certeza que deseja excluir seu usuário?',
+        },
+      })
+      .afterClosed()
+      .pipe(
+        filter((confirmed) => confirmed),
+        switchMap(() => this.userService.deleteUser(userId))
+      )
+      .subscribe({
+        next: () => {
+          this.successMsg = 'Usuário deletado com sucesso';
+          this.authService.logout();
+        },
+        error: (e) => {
+          this.errorMsg = 'Não foi possível deletar o usuário';
+          console.error(`Erro ${e.status}`, e);
+        },
+      });
   }
 }
