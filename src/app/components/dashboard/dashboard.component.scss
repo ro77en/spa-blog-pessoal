@@ -1,0 +1,19 @@
+.charts {
+    display: flex;
+    flex-direction: column;
+
+    mat-card {
+        padding: 1em;
+    }
+
+    .dashboard-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .dropdown {
+        min-width: 150px;
+    }
+}

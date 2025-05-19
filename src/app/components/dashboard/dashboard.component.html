@@ -1,0 +1,28 @@
+<div class="charts" *ngIf="isLoaded">
+  <mat-grid-list cols="1" rowHeight="500px">
+    <mat-card>
+      <div class="dashboard-header">
+        <h3>Postagens por</h3>
+        <mat-form-field appearance="outline" class="dropdown">
+          <mat-select
+            [(value)]="selectedView"
+            (selectionChange)="onViewChange()"
+          >
+            <mat-option value="user">Usuário</mat-option>
+            <mat-option value="category">Categoria</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <canvas
+        baseChart
+        [data]="chartData"
+        [type]="'bar'"
+        [options]="chartOptions"
+      ></canvas>
+    </mat-card>
+  </mat-grid-list>
+  <div *ngIf="errorMsg" class="error-msg">
+    {{ errorMsg }}
+  </div>
+</div>
