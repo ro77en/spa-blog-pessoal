@@ -4,6 +4,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoggedInGuard } from './auth/logged-in.guard';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 
 export const routes: Routes = [
   {
@@ -19,6 +20,11 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: ProfilePageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'dashboard',
+    component: DashboardPageComponent,
     canActivate: [AuthGuard],
   },
   {

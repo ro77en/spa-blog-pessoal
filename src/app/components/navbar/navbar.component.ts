@@ -61,4 +61,8 @@ export class NavbarComponent {
   goToProfilePage(): void {
     this.router.navigate(['/profile']);
   }
+
+  goToDashboardPage(): void {
+    this.router.navigate(['/dashboard']);
+  }
 }
