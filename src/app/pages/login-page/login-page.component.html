@@ -1,8 +1,14 @@
 <div class="container">
+  <h1 class="share-tec title">&lt;BlogPessoal /&gt;</h1>
+
   <div class="left flex-center">
-    <h1 class="share-tec">&lt;BlogPessoal /&gt;</h1>
-    <img src="logo-acelera.png" alt="Logo programa Acelera Maker" />
-    <p class="intro share-tec">
+    <img
+      src="logo-acelera.png"
+      class="logo"
+      [ngClass]="{ hidden: !isLogin }"
+      alt="Logo programa Acelera Maker"
+    />
+    <p class="intro share-tec" [ngClass]="{ hidden: !isLogin }">
       Aplicação de BlogPessoal desenvolvida para a trilha FrontEnd do programa
       Acelera Maker
     </p>
