@@ -1,24 +1,26 @@
 <div class="container">
   <h1 class="share-tec title">&lt;BlogPessoal /&gt;</h1>
 
-  <div class="left flex-center">
-    <img
-      src="logo-acelera.png"
-      class="logo"
-      [ngClass]="{ hidden: !isLogin }"
-      alt="Logo programa Acelera Maker"
-    />
-    <p class="intro share-tec" [ngClass]="{ hidden: !isLogin }">
-      Aplicação de BlogPessoal desenvolvida para a trilha FrontEnd do programa
-      Acelera Maker
-    </p>
-  </div>
-  <div class="right flex-center">
-    <ng-container *ngIf="isLogin; else signup">
-      <app-login-form (toggleForms)="toggleForms()" />
-    </ng-container>
-    <ng-template #signup>
-      <app-signup-form (toggleForms)="toggleForms()" />
-    </ng-template>
+  <div class="wrapper">
+    <div class="left flex-center">
+      <img
+        src="logo-acelera.png"
+        class="logo"
+        [ngClass]="{ hidden: !isLogin }"
+        alt="Logo programa Acelera Maker"
+      />
+      <p class="intro share-tec" [ngClass]="{ hidden: !isLogin }">
+        Aplicação de BlogPessoal desenvolvida para a trilha FrontEnd do programa
+        Acelera Maker
+      </p>
+    </div>
+    <div class="right flex-center">
+      <ng-container *ngIf="isLogin; else signup">
+        <app-login-form (toggleForms)="toggleForms()" />
+      </ng-container>
+      <ng-template #signup>
+        <app-signup-form (toggleForms)="toggleForms()" />
+      </ng-template>
+    </div>
   </div>
 </div>
