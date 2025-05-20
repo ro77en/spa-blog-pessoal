@@ -1,9 +1,8 @@
 {
   "version": 2,
-  "public": true,
   "builds": [
     {
-      "src": "dist/spa-blog-pessoal/**/*",
+      "src": "dist/spa-blog-pessoal/browser/**/*",
       "use": "@vercel/static"
     }
   ],
