@@ -6,6 +6,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { StorageService } from '../services/storage.service';
 import { switchMap, tap } from 'rxjs';
 
+import { environment } from '../../environments/environment';
+
 interface AuthUser {
   userId: number;
   username: string;
@@ -16,7 +18,7 @@ interface AuthUser {
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly API_URL = 'http://localhost:8080/api';
+  private readonly API_URL = `${environment.apiUrl}`;
   private jwtHelper = new JwtHelperService();
 
   currentUser = signal<AuthUser | null>(null);
