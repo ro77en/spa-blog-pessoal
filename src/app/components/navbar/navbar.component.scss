@@ -28,8 +28,8 @@
 .acelera-link {
   text-align: center;
 
-  & img {
-    height: 100%;
+  img {
+    max-height: 100%;
   }
 }
 
@@ -62,4 +62,20 @@
 .avatar-btn {
   background: none;
   border: none;
+}
+
+@media (width < 450px) {
+  .user-name {
+    display: none;
+  }
+
+  .acelera-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    img {
+      height: 80%;
+    }
+  }
 }
